@@ -6,38 +6,91 @@
     <title>The Modifier Lab</title>
     <style>
         :root {
-            --primary: #4a90e2;
-            --success: #2ecc71;
-            --error: #e74c3c;
+            /* All UI colors set to black */
+            --primary: #000000;
+            --text-main: #000000;
             --bg: #f0f2f5;
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; flex-direction: column; align-items: center; padding: 40px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 40px; 
+            color: var(--text-main); 
+        }
         
-        .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 700px; width: 100%; text-align: center; }
+        .container { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            max-width: 700px; 
+            width: 100%; 
+            text-align: center; 
+        }
 
-        h1 { color: #2c3e50; margin-bottom: 10px; }
+        h1, p { color: var(--text-main); }
+        
         .progress-bar { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 30px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.5s; }
 
         .game-screen { display: none; }
         .game-screen.active { display: block; }
 
-        .sentence-display { font-size: 1.4rem; padding: 30px; background: #f8f9fa; border-left: 5px solid var(--primary); margin: 20px 0; line-height: 1.6; }
+        .sentence-display { 
+            font-size: 1.4rem; 
+            padding: 30px; 
+            background: #f8f9fa; 
+            border-left: 5px solid var(--primary); 
+            margin: 20px 0; 
+            line-height: 1.6; 
+            color: var(--text-main);
+        }
 
         .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }
-        button { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: 0.3s; }
+        button { 
+            padding: 12px 25px; 
+            border: 2px solid #000000; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            font-weight: bold; 
+            background: white; 
+            color: #000000; 
+            transition: 0.3s; 
+        }
         
-        .btn-check { background: var(--primary); color: white; }
-        .btn-check:hover { background: #357abd; }
+        button:hover { background: #eeeeee; }
 
         /* Level 2 Styles */
-        .drop-zone { border-bottom: 3px dashed var(--error); color: var(--error); padding: 0 10px; font-weight: bold; }
+        .drop-zone { 
+            border-bottom: 3px dashed #000000; 
+            color: #000000; 
+            padding: 0 10px; 
+            font-weight: bold; 
+        }
+        
         .draggables { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
-        .draggable { background: white; border: 2px solid var(--primary); padding: 10px 20px; border-radius: 8px; cursor: grab; font-weight: bold; color: var(--primary); }
-        .draggable:active { cursor: grabbing; }
+        
+        .draggable { 
+            background: white; 
+            border: 2px solid #000000; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            cursor: grab; 
+            font-weight: bold; 
+            color: #000000; 
+        }
 
-        #feedback { margin-top: 20px; font-weight: bold; min-height: 24px; }
+        #feedback { 
+            margin-top: 20px; 
+            font-weight: bold; 
+            min-height: 24px; 
+            color: #000000; /* Feedback is now black */
+        }
     </style>
 </head>
 <body>
@@ -52,8 +105,8 @@
                 "Hoping to garner favor, my parent's approval was sought."
             </div>
             <div class="btn-group">
-                <button class="btn-check" onclick="checkL1(true)">Dangling Modifier!</button>
-                <button class="btn-check" style="background:#95a5a6" onclick="checkL1(false)">Looks Correct</button>
+                <button onclick="checkL1(true)">Dangling Modifier!</button>
+                <button onclick="checkL1(false)">Looks Correct</button>
             </div>
         </div>
 
@@ -80,8 +133,7 @@
         // Level 1 Logic
         function checkL1(isDangling) {
             if (isDangling) {
-                feedback.innerHTML = "✅ Correct! 'My parent's approval' can't hope to garner favor—only a person can.";
-                feedback.style.color = "var(--success)";
+                feedback.innerHTML = "Correct! 'My parent's approval' can't hope to garner favor—only a person can.";
                 progress.style.width = "50%";
                 setTimeout(() => {
                     document.getElementById('level1').classList.remove('active');
@@ -89,8 +141,7 @@
                     feedback.innerHTML = "";
                 }, 2000);
             } else {
-                feedback.innerHTML = "❌ Not quite. Who is 'hoping'? It's missing!";
-                feedback.style.color = "var(--error)";
+                feedback.innerHTML = "Not quite. Who is 'hoping'? It's missing!";
             }
         }
 
@@ -111,14 +162,11 @@
             const id = e.dataTransfer.getData('text');
             if (id === 'opt1') {
                 dropzone.innerText = "the moldy apples";
-                dropzone.style.color = "var(--success)";
                 dropzone.style.border = "none";
-                feedback.innerHTML = "🎉 Excellent! The apples were rotting, not the farmer!";
-                feedback.style.color = "var(--success)";
+                feedback.innerHTML = "Excellent! The apples were rotting, not the farmer!";
                 progress.style.width = "100%";
             } else {
-                feedback.innerHTML = "❌ Try again! Did the person rot for weeks?";
-                feedback.style.color = "var(--error)";
+                feedback.innerHTML = "Try again! Did the person rot for weeks?";
             }
         });
     </script>
